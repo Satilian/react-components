@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-import { TState } from "../../redux";
+import { TState } from "store";
 
 const user = ({ auth }: TState) => auth.user;
 const isAuth = ({ auth }: TState) => auth.isAuth;

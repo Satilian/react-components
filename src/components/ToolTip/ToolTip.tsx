@@ -1,25 +1,22 @@
-import React, { FC, MouseEvent, useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import * as styles from "./styles.module.scss";
 
 interface IProps {
   title: string;
+  className?: string;
 }
 
-export const ToolTip: FC<IProps> = ({ children, title }) => {
-  const ref = useRef(null);
-  const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    e.currentTarget;
-    console.log(e.pageX, e.pageY);
+export const ToolTip = ({ title, className }: IProps) => {
+  const [state, setState] = useState(className);
+  const handleMouseOver = (e: any) => {
+    console.dir(e.target.dataset);
   };
 
   useEffect(() => {
-    // console.log(ref.current)
-  }, [ref]);
+    document.addEventListener("mouseover", handleMouseOver);
 
-  return (
-    <div className={styles.container} ref={ref} onMouseMove={handleMouseMove}>
-      {children}
-      <div className={`${styles.title} ${styles.displayNone}`}>{title}</div>
-    </div>
-  );
+    return () => document.removeEventListener("mouseover", handleMouseOver);
+  }, []);
+
+  return <div className={`${styles.container} ${state}`}>{title}</div>;
 };

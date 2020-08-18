@@ -17,6 +17,7 @@ module.exports = {
     "quotes": [2, "double"],
     "indent": 0,
     "react/prop-types": 0,
+    "react/display-name": 0,
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/no-var-requires": "off",

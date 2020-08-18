@@ -1,4 +1,4 @@
-import { authReducer } from "./../modules/auth/authReducer";
+import { authReducer } from "../modules/auth/authReducer";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { persistReducer, persistStore } from "redux-persist";

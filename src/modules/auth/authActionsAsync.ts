@@ -1,8 +1,8 @@
-import { SignInRequest } from "./../../api/dto/signInRequest";
-import { SignUpRequest } from "../../api/dto/signUpRequest";
+import { SignInRequest } from "api/dto/signInRequest";
+import { SignUpRequest } from "api/dto/signUpRequest";
 import { authActions } from "./authActions";
 import { requestsRepository } from "./../../api/requestsRepository";
-import { asyncAction } from "./../../redux/asyncAction";
+import { asyncAction } from "store/asyncAction";
 
 const { signup, signin } = requestsRepository.auth;
 

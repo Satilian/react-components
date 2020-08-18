@@ -110,7 +110,7 @@ config = {
     filename: "js/[name].js",
     chunkFilename: "js/[name].js",
   },
-  resolve: { extensions: [".ts", ".tsx", ".js", ".jsx", "*.scss"] },
+  resolve: { modules: ["src", "node_modules"], extensions: [".ts", ".tsx", ".js", ".jsx"] },
   module: { rules },
   plugins,
 };

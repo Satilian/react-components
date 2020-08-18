@@ -3,11 +3,11 @@ import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Button } from "../../../components/Button";
-import { Input } from "../../../components/Input";
+import { Input } from "components/Input";
 import { passwordRegexp } from "../../../consts/regexp";
-import { authRouts } from "../../../routs/authRouts";
+import { authRouts } from "routs/authRouts";
 import { authActionsAsync } from "../authActionsAsync";
+import Button from "components/Button";
 
 type FormData = {
   name: string;

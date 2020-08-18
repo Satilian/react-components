@@ -8,7 +8,7 @@ import { authRouts } from "./routs/authRouts";
 import { links } from "./routs/links";
 import { App } from "./modules/app/App";
 import { Auth } from "./modules/auth/Auth";
-import { configureStore } from "./redux";
+import { configureStore } from "store";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { HomePage } from "./modules/homePage/HomePage";
 

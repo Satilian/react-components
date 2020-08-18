@@ -2,12 +2,12 @@ import styled from "astroturf";
 import React, { FC } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { Button } from "../../../components/Button";
 import { Input } from "../../../components/Input";
 import { authRouts } from "../../../routs/authRouts";
 import { authActionsAsync } from "../authActionsAsync";
 import { useDispatch } from "react-redux";
 import { emailRegexp, passwordRegexp } from "../../../consts/regexp";
+import Button from "components/Button";
 
 type FormData = {
   username: string;
