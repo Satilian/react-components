@@ -1,4 +1,4 @@
-import "./styles/style.scss";
+import "styles/style.scss";
 import React, { Suspense } from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";

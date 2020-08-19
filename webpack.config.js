@@ -56,7 +56,7 @@ const rules = [
         loader: MiniCssExtractPlugin.loader,
         options: { hmr: isDev },
       },
-      { loader: "css-loader", options: { modules: true } },
+      { loader: "css-loader" },
       {
         loader: "sass-loader",
         options: { sassOptions: { includePaths: [paths.styles] } },

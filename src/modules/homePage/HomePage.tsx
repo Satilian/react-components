@@ -1,18 +1,25 @@
-import React, { FC } from "react";
-import { Button } from "../../components/Button/Button";
 import styled from "astroturf";
 import { useToolTip } from "hooks/useToolTip";
+import React from "react";
+import { Button } from "../../components/Button/Button";
+import * as styles from "./styles.module.scss";
 
-export const HomePage: FC = () => {
-  const { getToolTipProps, ToolTipPortal } = useToolTip();
+export const HomePage = () => {
+  const { getToolTipProps } = useToolTip();
 
   return (
     <div>
-      <h1>Home page</h1>
+      <h1 {...getToolTipProps(<div>h1</div>)}>Home page</h1>
       <br />
       <ButtonContainer>
-        <ToolTipPortal />
-        <Button {...getToolTipProps(<div key={1}>content</div>)}>Button</Button>
+        <Button
+          {...getToolTipProps(
+            <div className={styles.toolTipContent}>button button button button button button</div>,
+            "left"
+          )}
+        >
+          Button
+        </Button>
       </ButtonContainer>
     </div>
   );
@@ -20,8 +27,8 @@ export const HomePage: FC = () => {
 
 const ButtonContainer = styled.div`
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 99%;
+  left: 92%;
   transform: translate(-50%, -50%);
   width: 200px;
 `;
