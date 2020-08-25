@@ -55,10 +55,8 @@ export const useToolTip = (className = "custom-class") => {
     container = document.querySelector(".react-tool-tip") || document.createElement("div");
     container.classList.add("react-tool-tip");
     container.classList.add(className);
-    container.setAttribute(
-      "style",
-      "position: absolute; width: max-content; height: max-content; display: none;"
-    );
+    const style = "position: absolute; width: max-content; display: none;";
+    container.setAttribute("style", style);
     document.body.appendChild(container);
 
     return () => {

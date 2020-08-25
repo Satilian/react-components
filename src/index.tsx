@@ -11,6 +11,12 @@ import { Auth } from "./modules/auth/Auth";
 import { configureStore } from "store";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { HomePage } from "./modules/homePage/HomePage";
+import { appRouts } from "routs/appRouts";
+import { CropperPage } from "modules/cropper/CropperPage";
+import { TreeSelectPage } from "modules/treeSelect/TreeSelectPage";
+import { componentsRouts } from "routs/componentsRouts";
+import { Layout } from "components/Layout";
+import { ToolTipPage } from "modules/toolTip/ToolTipPage";
 
 const { persistor, store } = configureStore();
 
@@ -19,12 +25,19 @@ render(
     <PersistGate loading={null} persistor={persistor}>
       <Suspense fallback={null}>
         <BrowserRouter>
-          <Switch>
-            <Route path="/" component={HomePage} />
-            <Route exact path={links.authLinks} component={Auth} />
-            <PrivateRoute exact path={links.appLinks} component={App} />
-            <Redirect to={authRouts.signin.link} />
-          </Switch>
+          <Layout>
+            <Switch>
+              <Route exact path={appRouts.home.link} component={HomePage} />
+
+              <Route path={componentsRouts.cropper.link} component={CropperPage} />
+              <Route path={componentsRouts.treeSelect.link} component={TreeSelectPage} />
+              <Route path={componentsRouts.toolTip.link} component={ToolTipPage} />
+
+              <Route path={links.authLinks} component={Auth} />
+              <PrivateRoute path={links.appLinks} component={App} />
+              <Redirect to={authRouts.signin.link} />
+            </Switch>
+          </Layout>
         </BrowserRouter>
       </Suspense>
     </PersistGate>
