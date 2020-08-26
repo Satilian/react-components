@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   rules: {
-    "quotes": [2, "double"],
+    "quotes": [1, "double"],
     "indent": 0,
     "react/prop-types": 0,
     "react/display-name": 0,

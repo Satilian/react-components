@@ -49,7 +49,7 @@ const rules = [
     ],
   },
   {
-    test: /\.(css|scss)$/,
+    test: /\.(css|scss|sass)$/,
     exclude: /\.module.(css|scss)$/,
     use: [
       {
@@ -95,7 +95,10 @@ const devServer = {
 const plugins = [
   new CleanWebpackPlugin(),
   new HtmlWebpackPlugin({ template: "../public/index.html" }),
-  new MiniCssExtractPlugin({ filename: "css/[name].css", chunkFilename: "css/[name].css" }),
+  new MiniCssExtractPlugin({
+    filename: `css/${isDev ? "[hash]." : ""}[name].css`,
+    chunkFilename: `css/${isDev ? "[hash]." : ""}[name].css`,
+  }),
 ];
 
 config = {
@@ -107,10 +110,10 @@ config = {
   output: {
     publicPath: "/",
     path: paths.dist,
-    filename: "js/[name].js",
-    chunkFilename: "js/[name].js",
+    filename: `js/${isDev ? "[hash]." : ""}[name].js`,
+    chunkFilename: `js/${isDev ? "[hash]." : ""}[name].js`,
   },
-  resolve: { modules: ["src", "node_modules"], extensions: [".ts", ".tsx", ".js", ".jsx"] },
+  resolve: { modules: ["node_modules", "src"], extensions: [".ts", ".tsx", ".js", ".jsx"] },
   module: { rules },
   plugins,
 };
@@ -118,7 +121,7 @@ config = {
 if (isDev) {
   plugins.push(
     new ForkTsCheckerWebpackPlugin({
-      eslint: { enabled: true, files: "./**/*.{ts,tsx,js,jsx}" },
+      eslint: { enabled: true, files: "./**/*.{ts,tsx}" },
       typescript: { configFile: paths.tsconfig },
     })
   );

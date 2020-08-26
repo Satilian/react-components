@@ -5,3 +5,18 @@
   box-sizing: border-box;
   outline: none;
 }
+
+#root {
+  display: flex;
+  overflow: hidden;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.container {
+  flex: 1 0;
+}

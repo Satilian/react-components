@@ -9,11 +9,11 @@ module.exports = {
   "quoteProps": "consistent",
   "requirePragma": false,
   "semi": true,
-  "singleQuote": false,
   "tabWidth": 2,
   "trailingComma": "es5",
   "useTabs": false,
   "vueIndentScriptAndStyle": false,
   "printWidth": 100,
-  "endOfLine":"auto",
+  "jsxSingleQuote": false,
+  "singleQuote": false,
 }

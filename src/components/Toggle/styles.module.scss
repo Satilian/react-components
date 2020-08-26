@@ -1,0 +1,17 @@
+.label {
+  display: flex;
+  user-select: none;
+}
+
+.input {
+  display: none;
+}
+
+.svg {
+  circle {
+    transition: all 0.3s ease-in-out;
+  }
+  rect {
+    transition: all 0.3s ease-in-out;
+  }
+}
