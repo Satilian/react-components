@@ -13,7 +13,7 @@ export const CropperPage = () => {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Cropper</h1>
 
       <input type="file" onChange={handleChange} />

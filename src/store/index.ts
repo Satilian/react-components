@@ -5,10 +5,10 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import ReduxThunk from "redux-thunk";
 import { Action, AnyAction, Failure, Success } from "typescript-fsa";
-import { appReducer } from "../modules/app/appReducer";
+import { adminReducer } from "../modules/admin/adminReducer";
 
 const createReducer = combineReducers({
-  app: appReducer,
+  admin: adminReducer,
   auth: authReducer,
 });
 

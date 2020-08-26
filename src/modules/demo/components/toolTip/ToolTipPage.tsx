@@ -1,14 +1,14 @@
 import styled from "astroturf";
 import { useToolTip } from "hooks/useToolTip";
 import React from "react";
-import { Button } from "../../components/Button/Button";
+import Button from "components/Button";
 import * as styles from "./styles.module.scss";
 
 export const ToolTipPage = () => {
   const { getToolTipProps } = useToolTip();
 
   return (
-    <div>
+    <div className="container">
       <h1>Tool tip</h1>
       <ButtonContainer>
         <Button

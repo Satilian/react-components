@@ -1,13 +1,13 @@
 import styled from "astroturf";
-import React, { FC } from "react";
+import Button from "components/Button";
+import React from "react";
 import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { Input } from "../../../components/Input";
+import { emailRegexp, passwordRegexp } from "../../../consts/regexp";
 import { authRouts } from "../../../routs/authRouts";
 import { authActionsAsync } from "../authActionsAsync";
-import { useDispatch } from "react-redux";
-import { emailRegexp, passwordRegexp } from "../../../consts/regexp";
-import Button from "components/Button";
 
 type FormData = {
   username: string;
@@ -16,7 +16,7 @@ type FormData = {
   confirm: string;
 };
 
-export const SignUp: FC = () => {
+export const SignUpPage = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, watch } = useForm<FormData>();
   const onSubmit = (data: FormData) => {

@@ -1,20 +1,20 @@
 import styled from "astroturf";
-import React, { FC } from "react";
+import Button from "components/Button";
+import { Input } from "components/Input";
+import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { Input } from "components/Input";
-import { passwordRegexp } from "../../../consts/regexp";
 import { authRouts } from "routs/authRouts";
+import { passwordRegexp } from "../../../consts/regexp";
 import { authActionsAsync } from "../authActionsAsync";
-import Button from "components/Button";
 
 type FormData = {
   name: string;
   password: string;
 };
 
-export const SignIn: FC = () => {
+export const SignInPage = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors } = useForm<FormData>();
   const onSubmit = (data: FormData) => {

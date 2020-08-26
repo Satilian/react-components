@@ -1,8 +1,8 @@
 import styled from "astroturf";
 import TreeSelect from "components/TreeSelect";
-import { regions } from "./mock";
 import { SelectDataType } from "components/TreeSelect/TreeSelect";
 import React, { useMemo } from "react";
+import { regions } from "./mock";
 
 // Преобразует структуру данных с сервера для компонента TreeSelect
 const assignChildrenRecursive = (list: SelectDataType[], parentId?: number): any =>
@@ -14,10 +14,10 @@ const assignChildrenRecursive = (list: SelectDataType[], parentId?: number): any
     }));
 
 export const TreeSelectPage = () => {
-  const data = useMemo<SelectDataType[]>(() => assignChildrenRecursive(regions), [regions.length]);
+  const data = useMemo<SelectDataType[]>(() => assignChildrenRecursive(regions), []);
 
   return (
-    <div>
+    <div className="container">
       <h1>TreeSelect</h1>
 
       <TreeSelectContainer>
