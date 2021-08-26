@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.droppable {
+  user-select: none;
+  padding: 50px 5px;
+  border: 1px solid black;
+  margin: 10px;
+  list-style: none;
+  min-height: 380px;
+  min-width: 260px;
+}
+
+.li {
+  cursor: grab;
+  padding: 10px 100px;
+  margin: 5px 0;
+  border: 1px solid rgb(220, 220, 220);
+  transition: all .3s ease;
+
+  &:hover {
+    background: rgb(250, 250, 197);
+  }
+}
+
+.highlite {
+  &::after {
+    width: 100%;
+    height: 100%;
+    border: 1ps solid red;
+  }
+}

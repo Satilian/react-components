@@ -3,6 +3,7 @@ import { IRoute } from "../interfaces/rout";
 import { CropperPage } from "modules/demo/components/cropper/CropperPage";
 import { TreeSelectPage } from "modules/demo/components/treeSelect/TreeSelectPage";
 import { TogglePage } from "modules/demo/components/toggle/TogglePage";
+import { DragDropPage } from "modules/demo/components/dragDrop/DragDropPage";
 
 export const demoRouts: Record<string, IRoute> = {
   cropper: {
@@ -24,5 +25,10 @@ export const demoRouts: Record<string, IRoute> = {
     title: "Toggle",
     link: "/toggle",
     Component: TogglePage,
+  },
+  dragDrop: {
+    title: "Drag&Drop",
+    link: "/dragDrop",
+    Component: DragDropPage,
   },
 };
