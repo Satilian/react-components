@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -22,41 +23,10 @@ const rules = [
     use: ["url-loader"],
   },
   {
-    test: /\.svg$/,
+    test: /\.(css|scss)$/,
     use: [
-      {
-        loader: "@svgr/webpack",
-        options: {
-          svgo: true,
-          svgoConfig: { plugins: [{ removeViewBox: false }] },
-        },
-      },
-      "url-loader",
-    ],
-  },
-  {
-    test: /\.module.(css|scss)$/,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDev },
-      },
-      { loader: "astroturf/css-loader", options: { modules: true } },
-      {
-        loader: "sass-loader",
-        options: { sassOptions: { includePaths: [paths.styles] } },
-      },
-    ],
-  },
-  {
-    test: /\.(css|scss|sass)$/,
-    exclude: /\.module.(css|scss)$/,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDev },
-      },
-      { loader: "css-loader" },
+      MiniCssExtractPlugin.loader,
+      { loader: "css-loader", options: { modules: true } },
       {
         loader: "sass-loader",
         options: { sassOptions: { includePaths: [paths.styles] } },
@@ -66,19 +36,12 @@ const rules = [
   {
     test: /\.(ts|tsx)$/,
     exclude: /node_modules/,
-    use: [
-      { loader: "ts-loader", options: { transpileOnly: true } },
-      {
-        loader: "astroturf/loader",
-        options: { extension: ".module.scss", enableCssProp: true },
-      },
-      { loader: "eslint-loader", options: { fix: true } },
-    ],
+    use: [{ loader: "ts-loader", options: { transpileOnly: true } }],
   },
 ];
 
 const devServer = {
-  contentBase: paths.public,
+  static: paths.public,
   compress: true,
   port: 8000,
   allowedHosts: ["*"],
@@ -121,9 +84,9 @@ config = {
 if (isDev) {
   plugins.push(
     new ForkTsCheckerWebpackPlugin({
-      eslint: { enabled: true, files: "./**/*.{ts,tsx}" },
       typescript: { configFile: paths.tsconfig },
-    })
+    }),
+    new ESLintPlugin({ fix: true })
   );
   config.devtool = "inline-source-map";
 } else {

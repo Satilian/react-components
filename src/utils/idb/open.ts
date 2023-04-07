@@ -35,7 +35,7 @@ export const open = (varsion: number, dbData: ITabelConfig[]) => {
 };
 
 export const remove = () => {
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     indexedDB.deleteDatabase("messanger").onsuccess = () => resolve();
   });
 };
