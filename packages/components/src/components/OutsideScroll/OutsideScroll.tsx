@@ -10,6 +10,7 @@ import React, {
 import { HorizontalTrack } from "./HorizontalTrack";
 import { VerticalTrack } from "./VerticalTrack";
 import cn from "./style.module.scss";
+import { useDrag } from "./useDrag";
 
 type Props = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
   children: ReactNode;
@@ -30,6 +31,13 @@ export const OutsideScroll = ({ children, ...props }: Props) => {
     );
   };
 
+  const touchStart = useDrag((e) => {
+    ref.current?.scrollTo(
+      ref.current.scrollLeft - e.movementX,
+      ref.current.scrollTop - e.movementY
+    );
+  });
+
   useEffect(() => {
     if (!ref.current) return;
     const { offsetHeight, offsetWidth, scrollHeight, scrollWidth } = ref.current;
@@ -43,6 +51,7 @@ export const OutsideScroll = ({ children, ...props }: Props) => {
         className={`${cn.scrolled} ${props.className}`}
         ref={ref}
         onWheel={handleScroll}
+        onTouchStart={touchStart}
       >
         {children}
       </div>
