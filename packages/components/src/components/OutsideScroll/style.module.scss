@@ -1,0 +1,46 @@
+.wrapper {
+    position: relative;
+}
+
+.scrolled {
+    border: 3px solid red;
+    overflow: hidden;
+    position: relative;
+}
+
+.trackV, .trackH {
+    position: absolute;
+    background: gray;
+    border-radius: 10px;
+}
+
+.trackV {
+    right: -15px;
+    top: 0;
+    width: 7px;
+    height: 100%;
+}
+
+.trackH {
+    bottom: -15px;
+    left: 0;
+    width: 100%;
+    height: 7px;
+}
+
+.thumbV, .thumbH {
+    position: absolute;
+    background: green;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.thumbV {
+    min-height: 10px;
+    width: 100%;
+}
+
+.thumbH {
+    min-width: 10px;
+    height: 100%;
+}

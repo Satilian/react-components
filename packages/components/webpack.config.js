@@ -26,7 +26,12 @@ const rules = [
     test: /\.(css|scss)$/,
     use: [
       MiniCssExtractPlugin.loader,
-      { loader: "css-loader", options: { modules: true } },
+      {
+        loader: "css-loader",
+        options: {
+          modules: { localIdentName: "[folder]_[local]-[hash:base64:5]" },
+        },
+      },
       {
         loader: "sass-loader",
         options: { sassOptions: { includePaths: [paths.styles] } },
