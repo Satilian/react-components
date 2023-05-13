@@ -1,0 +1,32 @@
+.app {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: white;
+}
+
+.scrolled{
+    width: 1000px;
+    height: 500px;
+}
+
+.content {
+    background: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttns {
+    line-height: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+
+    & > button {
+        width: 20px;
+        margin: 5px;
+        cursor: pointer;
+    }
+}

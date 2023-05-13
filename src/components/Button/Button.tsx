@@ -1,5 +1,4 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
-import * as styles from "./styles.module.scss";
 
 interface IProps
   extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement> {
@@ -8,5 +7,5 @@ interface IProps
 }
 
 export const Button = ({ size, className, ...props }: IProps) => (
-  <button className={`${styles.button} ${size && `size-${size}`} ${className}`} {...props} />
+  <button className={`${size && `size-${size}`} ${className}`} {...props} />
 );

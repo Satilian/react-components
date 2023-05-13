@@ -1,7 +1,7 @@
-import styled from "astroturf";
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import { CropBox } from "./CropBox";
 import { cropImage } from "./cropImage";
+import cn from "./style.module.css";
 
 interface IProps {
   dataUrl: string;
@@ -52,40 +52,15 @@ export const Cropper = ({ dataUrl, width, height, onResize }: IProps) => {
   }, []);
 
   return (
-    <Container>
-      <Wrapper>
-        <CroppedImage src={dataUrl} alt="Crop this" ref={imageRef} />
+    <div className={cn.cropper}>
+      <div className={cn.wrapper}>
+        <img className={cn.croppedImage} src={dataUrl} alt="Crop this" ref={imageRef} />
         <CropBox aspectRatio={aspectRatio} imageRef={imageRef} onResize={handleResize} />
-      </Wrapper>
+      </div>
 
-      <Preview ref={previewRef}>
-        <PreviewImage src={dataUrl} alt="Preview" ref={previewImgRef} />
-      </Preview>
-    </Container>
+      <div className={cn.preview} ref={previewRef}>
+        <img className={cn.previewImage} src={dataUrl} alt="Preview" ref={previewImgRef} />
+      </div>
+    </div>
   );
 };
-
-const Container = styled.div`
-  display: flex;
-  justify-content: space-around;
-  user-select: none;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  width: ${WIDTH}px;
-`;
-
-const CroppedImage = styled.img`
-  width: 100%;
-`;
-
-const Preview = styled.div`
-  position: relative;
-  overflow: hidden;
-  background: #888888;
-`;
-
-const PreviewImage = styled.img`
-  position: absolute;
-`;

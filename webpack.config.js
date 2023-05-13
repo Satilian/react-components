@@ -5,6 +5,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
+const { ModuleFederationPlugin } = require("webpack").container;
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -22,44 +24,18 @@ const rules = [
     use: ["url-loader"],
   },
   {
-    test: /\.svg$/,
+    test: /\.css$/,
     use: [
+      MiniCssExtractPlugin.loader,
       {
-        loader: "@svgr/webpack",
+        loader: "css-loader",
         options: {
-          svgo: true,
-          svgoConfig: { plugins: [{ removeViewBox: false }] },
+          modules: { localIdentName: "[folder]_[local]-[hash:base64:5]" },
+          importLoaders: 1,
         },
       },
-      "url-loader",
-    ],
-  },
-  {
-    test: /\.module.(css|scss)$/,
-    use: [
       {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDev },
-      },
-      { loader: "astroturf/css-loader", options: { modules: true } },
-      {
-        loader: "sass-loader",
-        options: { sassOptions: { includePaths: [paths.styles] } },
-      },
-    ],
-  },
-  {
-    test: /\.(css|scss|sass)$/,
-    exclude: /\.module.(css|scss)$/,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: { hmr: isDev },
-      },
-      { loader: "css-loader" },
-      {
-        loader: "sass-loader",
-        options: { sassOptions: { includePaths: [paths.styles] } },
+        loader: "postcss-loader",
       },
     ],
   },
@@ -67,20 +43,18 @@ const rules = [
     test: /\.(ts|tsx)$/,
     exclude: /node_modules/,
     use: [
-      { loader: "ts-loader", options: { transpileOnly: true } },
       {
-        loader: "astroturf/loader",
-        options: { extension: ".module.scss", enableCssProp: true },
+        loader: "ts-loader",
+        options: { transpileOnly: true },
       },
-      { loader: "eslint-loader", options: { fix: true } },
     ],
   },
 ];
 
 const devServer = {
-  contentBase: paths.public,
+  static: paths.dist,
   compress: true,
-  port: 8000,
+  port: 8001,
   allowedHosts: ["*"],
   historyApiFallback: true,
   proxy: {
@@ -99,6 +73,15 @@ const plugins = [
     filename: `css/${isDev ? "[hash]." : ""}[name].css`,
     chunkFilename: `css/${isDev ? "[hash]." : ""}[name].css`,
   }),
+  new ModuleFederationPlugin({
+    name: "app1",
+    filename: "remoteEntry.js",
+    exposes: {
+      "./Cropper": "components/Сropper/Cropper.tsx",
+      "./Button": "components/Button/Button.tsx",
+    },
+    shared: { "react": { singleton: true }, "react-dom": { singleton: true } },
+  }),
 ];
 
 config = {
@@ -108,10 +91,7 @@ config = {
   context: paths.src,
   entry: { app: "./index" },
   output: {
-    publicPath: "/",
-    path: paths.dist,
-    filename: `js/${isDev ? "[hash]." : ""}[name].js`,
-    chunkFilename: `js/${isDev ? "[hash]." : ""}[name].js`,
+    publicPath: "auto",
   },
   resolve: { modules: ["node_modules", "src"], extensions: [".ts", ".tsx", ".js", ".jsx"] },
   module: { rules },
@@ -121,9 +101,9 @@ config = {
 if (isDev) {
   plugins.push(
     new ForkTsCheckerWebpackPlugin({
-      eslint: { enabled: true, files: "./**/*.{ts,tsx}" },
       typescript: { configFile: paths.tsconfig },
-    })
+    }),
+    new ESLintPlugin({ fix: true })
   );
   config.devtool = "inline-source-map";
 } else {
@@ -132,7 +112,7 @@ if (isDev) {
   config.optimization = {
     minimize: true,
     minimizer: [new TerserPlugin()],
-    splitChunks: { chunks: "all" },
+    splitChunks: false,
   };
 }
 
