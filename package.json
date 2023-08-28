@@ -4,7 +4,7 @@
   "description": "react-components app",
   "license": "ISC",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server",
+    "start": "cross-env NODE_ENV=development webpack serve",
     "build": "webpack"
   },
   "dependencies": {

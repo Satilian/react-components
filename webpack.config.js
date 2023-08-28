@@ -68,13 +68,13 @@ const devServer = {
 
 const plugins = [
   new CleanWebpackPlugin(),
-  new HtmlWebpackPlugin({ template: "../public/index.html" }),
+  new HtmlWebpackPlugin({ template: "./public/index.html" }),
   new MiniCssExtractPlugin({
     filename: `css/${isDev ? "[hash]." : ""}[name].css`,
     chunkFilename: `css/${isDev ? "[hash]." : ""}[name].css`,
   }),
   new ModuleFederationPlugin({
-    name: "app1",
+    name: "components",
     filename: "remoteEntry.js",
     exposes: {
       "./Cropper": "components/Сropper/Cropper.tsx",
@@ -87,14 +87,11 @@ const plugins = [
 config = {
   mode: isDev ? "development" : "production",
   stats: { children: false },
-  devServer,
-  context: paths.src,
-  entry: { app: "./index" },
-  output: {
-    publicPath: "auto",
-  },
+  entry: "./src/index.ts",
+  output: { publicPath: "auto" },
   resolve: { modules: ["node_modules", "src"], extensions: [".ts", ".tsx", ".js", ".jsx"] },
   module: { rules },
+  devServer,
   plugins,
 };
 
@@ -112,7 +109,6 @@ if (isDev) {
   config.optimization = {
     minimize: true,
     minimizer: [new TerserPlugin()],
-    splitChunks: false,
   };
 }
 
